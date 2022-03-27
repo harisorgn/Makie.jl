@@ -5,5 +5,5 @@ __result = begin # hide
 fig
 end # hide
 save(joinpath(@OUTPUT, "example_8430063235735896023.png"), __result) # hide
-
+save(joinpath(@OUTPUT, "example_8430063235735896023.svg"), __result) # hide
 nothing # hide
