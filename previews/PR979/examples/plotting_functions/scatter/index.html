@@ -15,8 +15,8 @@ scatter(points, color = 1:30, markersize = range(5, 30, length = 30),
     colormap = :thermal)</code></pre><p></p><p><a id="example_2506038004580833128"><img alt="" src="../../../assets/examples/plotting_functions/scatter/code/output/example_2506038004580833128.svg"/></a></p><h3 id="available_markers"><a class="header-anchor" href="#available_markers">Available markers</a></h3><p>As markers, you can use almost any unicode character. Currently, such glyphs are picked from the <code>Dejavu Sans</code> font, because it offers a wide range of symbols. There is also a number of markers that can be referred to as a symbol, so that it's not necessary to find out the respective unicode character.</p><p>The backslash character examples have to be tab-completed in the REPL or editor so they are converted into unicode.</p><div class="admonition note"><p class="admonition-title">Note</p><p>The scatter markers have the same sizes that the glyphs in Dejavu Sans have. This means that they are not matched in size or area. Currently, Makie does not have the option to use area matched markers, and sometimes manual adjustment might be necessary to achieve a good visual result.</p></div><pre><code class="language-julia">using CairoMakie
 
 markers_labels = [
+    (:circle, ":circle"),
     (:rect, ":rect"),
-    (:star5, ":star5"),
     (:diamond, ":diamond"),
     (:hexagon, ":hexagon"),
     (:cross, ":cross"),
@@ -27,12 +27,11 @@ markers_labels = [
     (:rtriangle, ":rtriangle"),
     (:pentagon, ":pentagon"),
     (:star4, ":star4"),
+    (:star5, ":star5"),
+    (:star6, ":star6"),
     (:star8, ":star8"),
     (:vline, ":vline"),
     (:hline, ":hline"),
-    (:x, ":x"),
-    (:+, ":+"),
-    (:circle, ":circle"),
     ('a', "'a'"),
     ('B', "'B'"),
     ('↑', "'\\uparrow'"),
@@ -54,7 +53,7 @@ for (i, (marker, label)) in enumerate(markers_labels)
         align = (:center, :bottom))
 end
 
-f</code></pre><p></p><p><a id="example_1702166626916382478"><img alt="" src="../../../assets/examples/plotting_functions/scatter/code/output/example_1702166626916382478.svg"/></a></p><h3 id="bezier_path_markers"><a class="header-anchor" href="#bezier_path_markers">Bezier path markers</a></h3><p>You can also use bezier paths as markers. A bezier path marker should fit into the square from -1 to 1 in x and y to be comparable in size to other default markers and to be correctly rendered by GLMakie, because here the path has to be rendered to a bitmap first . In CairoMakie, paths are drawn as they are without an intermediate bitmap, so every size is possible.</p><p>A <code>BezierPath</code> contains a vector of path commands, these are <code>MoveTo</code>, <code>LineTo</code>, <code>CurveTo</code>, <code>EllipticalArc</code> and <code>ClosePath</code>.</p><p>Here is an example with a simple arrow that is centered on its tip, built from path elements.</p><pre><code class="language-julia">using CairoMakie
+f</code></pre><p></p><p><a id="example_17345408065853483772"><img alt="" src="../../../assets/examples/plotting_functions/scatter/code/output/example_17345408065853483772.svg"/></a></p><h3 id="bezier_path_markers"><a class="header-anchor" href="#bezier_path_markers">Bezier path markers</a></h3><p>You can also use bezier paths as markers. A bezier path marker should fit into the square from -1 to 1 in x and y to be comparable in size to other default markers and to be correctly rendered by GLMakie, because here the path has to be rendered to a bitmap first . In CairoMakie, paths are drawn as they are without an intermediate bitmap, so every size is possible.</p><p>A <code>BezierPath</code> contains a vector of path commands, these are <code>MoveTo</code>, <code>LineTo</code>, <code>CurveTo</code>, <code>EllipticalArc</code> and <code>ClosePath</code>.</p><p>Here is an example with a simple arrow that is centered on its tip, built from path elements.</p><pre><code class="language-julia">using CairoMakie
 
 arrow_path = BezierPath([
     MoveTo(Point(0, 0)),
